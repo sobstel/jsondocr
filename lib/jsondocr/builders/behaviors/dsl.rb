@@ -54,6 +54,23 @@ module JSONdocr
               attr_reader name
             end
           end
+
+          def dsl_elements(element_name)
+            element_name = element_name.to_sym
+
+            dsl_attr :elements
+
+            define_method(element_name) do |name, &block|
+              builder_class = Kernel.const_get("::JSONdocr::Builders::#{element_name.to_s.capitalize}")
+
+              @elements ||= {}
+              @elements[name] ||= builder_class.new
+              @elements[name].doc(&block)
+            end
+
+            alias_method :document, :object if element_name == :object
+            alias_method :field, :property if element_name == :property
+          end
         end
       end
     end

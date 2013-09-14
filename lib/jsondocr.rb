@@ -14,9 +14,6 @@ require "jsondocr/elements/array"
 
 require "jsondocr/builders/behaviors/dsl"
 require "jsondocr/builders/behaviors/validation"
-require "jsondocr/builders/behaviors/objects"
-require "jsondocr/builders/behaviors/properties"
-require "jsondocr/builders/behaviors/arrays"
 
 require "jsondocr/builders/doc"
 require "jsondocr/builders/object"
