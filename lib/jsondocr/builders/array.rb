@@ -5,6 +5,7 @@ module JSONdocr
 
       dsl_element_class JSONdocr::Elements::Array
 
+      dsl_attr :term, :writer => true
       dsl_attr :item, :writer => true
 
       def object(&block)
