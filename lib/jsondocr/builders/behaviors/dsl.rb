@@ -51,13 +51,9 @@ module JSONdocr
           def dsl_elements(element_name)
             element_name = element_name.to_sym
 
-            dsl_attr :elements
-
             define_method(element_name) do |name, &block|
-              builder_class = Kernel.const_get("::JSONdocr::Builders::#{element_name.to_s.capitalize}")
-
               @elements ||= {}
-              @elements[name] ||= builder_class.new
+              @elements[name] ||= Kernel.const_get("::JSONdocr::Builders::#{element_name.to_s.capitalize}").new
               @elements[name].doc(&block)
             end
 
