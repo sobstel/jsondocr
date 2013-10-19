@@ -2,6 +2,7 @@ module JSONdocr
   module Builders
     class Array
       include Behaviors::Dsl
+      include Behaviors::Validation
 
       dsl_attr :term
       dsl_attr :item
@@ -20,8 +21,6 @@ module JSONdocr
       def array(&block)
         Array.new.doc(&block)
       end
-
-      include Behaviors::Validation
     end
   end
 end

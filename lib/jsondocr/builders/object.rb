@@ -2,15 +2,14 @@ module JSONdocr
   module Builders
     class Object
       include Behaviors::Dsl
-
-      dsl_attr :term
-      dsl_attr :desc
+      include Behaviors::Validation
 
       dsl_elements :object
       dsl_elements :property
       dsl_elements :array
 
-      include Behaviors::Validation
+      dsl_attr :term
+      dsl_attr :desc
     end
   end
 end

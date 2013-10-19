@@ -3,10 +3,10 @@ module JSONdocr
     class Doc
       include Behaviors::Dsl
 
+      dsl_elements :object
+
       dsl_attr :name
       dsl_attr :desc
-
-      dsl_elements :object
     end
   end
 end
