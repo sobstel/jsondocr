@@ -3,8 +3,9 @@ module JSONdocr
     class Array
       include Behaviors::Dsl
 
-      dsl_attr :term, :writer => true
-      dsl_attr :item, :writer => true
+      dsl_attr :term
+      dsl_attr :item
+      dsl_attr :sample
 
       def object(&block)
         Object.new.doc(&block)

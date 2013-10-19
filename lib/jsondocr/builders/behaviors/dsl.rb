@@ -43,10 +43,8 @@ module JSONdocr
           def dsl_attr(name, options = {})
             name = name.to_sym
 
-            if options[:writer] # default writer: def name; @name = val; end
-              define_method(name) do |val|
-                instance_variable_set("@#{name}", val);
-              end
+            define_method(name) do |val|
+              instance_variable_set("@#{name}", val);
             end
           end
 
