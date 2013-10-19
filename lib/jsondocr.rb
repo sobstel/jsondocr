@@ -7,10 +7,7 @@ begin
 rescue LoadError
 end
 
-require "jsondocr/elements/doc"
-require "jsondocr/elements/object"
-require "jsondocr/elements/property"
-require "jsondocr/elements/array"
+require "jsondocr/element"
 
 require "jsondocr/builders/behaviors/dsl"
 require "jsondocr/builders/behaviors/validation"

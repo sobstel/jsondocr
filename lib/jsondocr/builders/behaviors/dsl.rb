@@ -25,22 +25,21 @@ module JSONdocr
             end
           end
 
-          element = self.class.dsl_element_class.new
+          element = ::JSONdocr::Element.new(self.class.to_s.split("::").last.downcase.to_sym)
 
+          # rewrite vars from builder to target element class
           self.instance_variables.each do |var_name|
             val = build_resolver.call(self.instance_variable_get(var_name))
             element.instance_variable_set(var_name, val)
+            element.define_singleton_method(var_name[1..-1]) do
+              instance_variable_get(var_name)
+            end
           end
 
           element
         end
 
         module ClassMethods
-          def dsl_element_class(element_class = nil)
-            @element_class = element_class if element_class
-            @element_class
-          end
-
           def dsl_attr(name, options = {})
             name = name.to_sym
 
@@ -48,10 +47,6 @@ module JSONdocr
               define_method(name) do |val|
                 instance_variable_set("@#{name}", val);
               end
-            end
-
-            dsl_element_class.class_exec do
-              attr_reader name
             end
           end
 

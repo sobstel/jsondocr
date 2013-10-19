@@ -3,8 +3,6 @@ module JSONdocr
     class Object
       include Behaviors::Dsl
 
-      dsl_element_class JSONdocr::Elements::Object
-
       dsl_attr :term, :writer => true
       dsl_attr :desc, :writer => true
 
