@@ -1,0 +1,18 @@
+<h1>{{element.term}}</h1>
+
+<p>{{element.desc}}</p>
+
+<h2>Attributes</h2>
+<dl>
+{{#each element.elements}}
+  <dt>{{term}}</dt>
+  <dd>render element, :of_object/:short/:summary</dd>
+{{/each}}
+</dl>
+
+<h2>Example</h2>
+<p>
+{{#each element.elements}}
+  <br/>
+{{/each}}
+</p>
