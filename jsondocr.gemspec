@@ -1,8 +1,6 @@
-version = File.read(File.expand_path('../VERSION', __FILE__)).strip
-
 Gem::Specification.new do |s|
   s.name = "jsondocr"
-  s.version = version
+  s.version = "0.0.2dev"
   s.summary = "jsondocr"
   s.description = "DSL for documenting JSON schema"
   s.license = 'MIT'
@@ -14,8 +12,9 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
 
   s.add_dependency "docile"
+  s.add_dependency "handlebars"
 
-  s.add_development_dependency "pry"
-  s.add_development_dependency "pry-remote"
-  s.add_development_dependency "pry-nav"
+  s.add_dependency "pry"
+  s.add_dependency "pry-remote"
+  s.add_dependency "pry-nav"
 end
