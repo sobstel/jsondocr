@@ -13,23 +13,11 @@ module JSONdocr::Builders::Behaviors
     alias_method :dsl_eval, :doc
 
     def build
-      build_resolver = ->(val) do
-        if val.respond_to? :build
-          val.build
-        elsif val.is_a? ::Hash
-          Hash[val.collect { |k,v| [k, build_resolver.call(v)] }]
-        elsif val.is_a? ::Array
-          val.collect { |v| build_resolver.call(v) }
-        else
-          val
-        end
-      end
-
-      element = ::JSONdocr::Element.new(self.class.to_s.split("::").last.downcase.to_sym)
+      element = ::JSONdocr::Element.new(element_type)
 
       # rewrite vars from builder to target element class
       self.instance_variables.each do |var_name|
-        val = build_resolver.call(self.instance_variable_get(var_name))
+        val = resolve_value(self.instance_variable_get(var_name))
         element.instance_variable_set(var_name, val)
         element.define_singleton_method(var_name[1..-1]) do
           instance_variable_get(var_name)
@@ -38,6 +26,23 @@ module JSONdocr::Builders::Behaviors
 
       element
     end
+
+    private
+      def element_type
+        @element_type ||= self.class.to_s.split("::").last.downcase.to_sym
+      end
+
+      def resolve_value(val)
+        if val.respond_to? :build
+          val.build
+        elsif val.is_a? ::Hash
+          Hash[val.collect { |k,v| [k, resolve_value(v)] }]
+        elsif val.is_a? ::Array
+          val.collect { |v| resolve_value(v) }
+        else
+          val
+        end
+      end
 
     module ClassMethods
       def dsl_attr(name, options = {})
