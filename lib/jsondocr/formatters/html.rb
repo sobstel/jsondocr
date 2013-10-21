@@ -2,9 +2,10 @@ require "handlebars"
 
 module JSONdocr::Formatters
   class Html
-    def render(tpl_name, attrs)
-      tpl_file = File.read(File.expand_path(File.dirname(__FILE__)) + "/html/#{tpl_name}.hbs")
-      handlebars.compile(tpl_file).call(attrs)
+    include Renderer
+
+    def render_template(tpl, attrs)
+      handlebars.compile(tpl).call(attrs)
     end
 
     private
@@ -16,6 +17,10 @@ module JSONdocr::Formatters
         @opts[:object_path] ||= "objects/%{name}/"
 
         @handlebars = Handlebars::Context.new
+
+        @handlebars.register_helper(:render) do |element, name|
+          render element, name
+        end
 
         @handlebars.register_helper(:object_url) do |object, object_name|
           url = @opts[:base_href]
