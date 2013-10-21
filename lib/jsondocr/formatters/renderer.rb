@@ -10,7 +10,7 @@ module JSONdocr::Formatters
 
       # use corresponding presenter if available
       begin
-        presenter_class = Kernel.const_get("::JSONdocr::Presenters::#{element.element_type.to_s.camelize}::#{name.to_s.camelize}")
+        presenter_class = JSONdocr.const_get("Presenters::#{element.element_type.to_s.camelize}::#{name.to_s.camelize}")
         presenter_attrs = presenter_class.prepare(element)
         attrs.merge! presenter_attrs
       rescue NameError

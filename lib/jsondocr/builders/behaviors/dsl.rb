@@ -58,7 +58,7 @@ module JSONdocr::Builders::Behaviors
 
         define_method(element_name) do |name, &block|
           @elements ||= {}
-          @elements[name] ||= Kernel.const_get("::JSONdocr::Builders::#{element_name.to_s.capitalize}").new
+          @elements[name] ||= JSONdocr.const_get("Builders::#{element_name.to_s.capitalize}").new
           @elements[name].doc(&block)
         end
 
