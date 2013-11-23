@@ -1,9 +1,5 @@
-begin
-  require "pry"
-  require "pry-remote"
-  require "pry-nav"
-rescue LoadError
-end
+require "bundler/setup"
+require "awesome_print"
 
 module JSONdocr
 end
@@ -11,4 +7,4 @@ end
 require "jsondocr/element"
 require "jsondocr/builders"
 require "jsondocr/presenters"
-require "jsondocr/formatters"
+require "jsondocr/formatter"

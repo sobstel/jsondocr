@@ -3,9 +3,15 @@ module JSONdocr::Builders
     include Behaviors::Dsl
     include Behaviors::Validation
 
+    dsl_attr :name
     dsl_attr :term
+    dsl_attr :desc
     dsl_attr :item
     dsl_attr :sample
+
+    def item(element, &block)
+      @item = element.doc(&block).build
+    end
 
     def object(&block)
       Object.new.doc(&block)

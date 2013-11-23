@@ -5,7 +5,6 @@ module JSONdocr
   end
 end
 
-require "jsondocr/presenters/doc/catalog"
-require "jsondocr/presenters/doc/glossary"
+# require "jsondocr/presenters/doc/catalog"
+# require "jsondocr/presenters/doc/glossary"
 
-require "jsondocr/presenters/property/summary"

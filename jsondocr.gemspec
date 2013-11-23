@@ -11,10 +11,12 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = false
 
-  s.add_dependency "docile"
-  s.add_dependency "handlebars"
+  s.add_runtime_dependency "docile"
+  s.add_runtime_dependency "tilt", "~>2.0.0.beta1"
 
-  s.add_dependency "pry"
-  s.add_dependency "pry-remote"
-  s.add_dependency "pry-nav"
+  # add_development_dependency
+  s.add_runtime_dependency "pry"
+  s.add_runtime_dependency "pry-remote"
+  s.add_runtime_dependency "pry-nav"
+  s.add_runtime_dependency "awesome_print"
 end

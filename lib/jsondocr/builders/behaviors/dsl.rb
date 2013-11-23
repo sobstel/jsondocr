@@ -53,17 +53,20 @@ module JSONdocr::Builders::Behaviors
         end
       end
 
-      def dsl_elements(element_name)
-        element_name = element_name.to_sym
+      def dsl_elements(element_type)
+        element_type = element_type.to_sym
 
-        define_method(element_name) do |name, &block|
+        define_method(element_type) do |element_name, &block|
           @elements ||= {}
-          @elements[name] ||= JSONdocr.const_get("Builders::#{element_name.to_s.capitalize}").new
-          @elements[name].doc(&block)
+          unless @elements[element_name]
+            @elements[element_name] = JSONdocr.const_get("Builders::#{element_type.to_s.capitalize}").new
+            @elements[element_name].doc { name(element_name) }
+          end
+          @elements[element_name].doc(&block)
         end
 
-        alias_method :document, :object if element_name == :object
-        alias_method :field, :property if element_name == :property
+        alias_method :document, :object if element_type == :object
+        alias_method :field, :property if element_type == :property
       end
     end
   end

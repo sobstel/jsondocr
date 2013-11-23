@@ -1,5 +1,9 @@
 module JSONdocr::Presenters::Doc
   class Glossary < SimpleDelegator
-    # __getobj__()
+    def prepare(doc)
+      #TODO
+      # __getobj__()
+      return {}
+    end
   end
 end
