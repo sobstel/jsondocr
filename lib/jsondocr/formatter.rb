@@ -21,12 +21,12 @@ module JSONdocr
     end
 
     def render(element, opts = {})
-      tpl_dir = opts[:dir] || element.element_type
-      tpl_name = opts[:as] || "default"
-      tpl_ext = opts[:ext] || "erb"
-      tpl_path = File.expand_path(File.dirname(__FILE__)) + "/templates/#{tpl_dir}/#{tpl_name}.#{tpl_ext}"
+      opts[:dir] ||= element.element_type
+      opts[:as] ||= "default"
+      opts[:ext] ||= "erb"
+      tpl_path = File.expand_path(File.dirname(__FILE__)) + "/templates/#{opts[:dir]}/#{opts[:as]}.#{opts[:ext]}"
 
-      vars = {}
+      vars = opts
       vars[:element] = element
       vars[element.element_type] = element
 

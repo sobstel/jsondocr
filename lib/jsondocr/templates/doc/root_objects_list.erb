@@ -1,5 +1,5 @@
 <ul>
   <% doc.elements.each do |name, element| %>
-    <li><a href="<%= path(element) %>"><%= element.term %></a></li>
+    <li<%= ' class="active"' if current_path == path(element)%>><a href="<%= path(element) %>"><%= element.term %></a></li>
   <% end %>
 </ul>
