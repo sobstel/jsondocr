@@ -3,6 +3,7 @@ jsondocr
 
 DSL for documenting JSON schema.
 
+[![Gem Version](https://badge.fury.io/rb/jsondocr.png)](http://badge.fury.io/rb/jsondocr)
 [![Code Climate](https://codeclimate.com/github/sobstel/jsondocr.png)](https://codeclimate.com/github/sobstel/jsondocr)
 
 Element types
