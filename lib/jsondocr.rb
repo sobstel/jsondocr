@@ -1,5 +1,4 @@
 require "bundler/setup"
-require "awesome_print"
 
 module JSONdocr
 end
