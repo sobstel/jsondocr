@@ -12,4 +12,6 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
 
   s.add_runtime_dependency "docile"
+
+  s.add_development_dependency "awesome_print"
 end
