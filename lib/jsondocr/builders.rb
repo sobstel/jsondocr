@@ -5,10 +5,10 @@ module JSONdocr
   end
 end
 
-require "jsondocr/builders/behaviors/dsl"
-require "jsondocr/builders/behaviors/validation"
+require_relative "builders/behaviors/dsl"
+require_relative "builders/behaviors/validation"
 
-require "jsondocr/builders/doc"
-require "jsondocr/builders/object"
-require "jsondocr/builders/property"
-require "jsondocr/builders/array"
+require_relative "builders/doc"
+require_relative "builders/object"
+require_relative "builders/property"
+require_relative "builders/array"
