@@ -14,9 +14,9 @@ module JSONdocr::Formatters
       out += "\n"
 
       doc.elements.each do |key, el|
-        out += "\# #{el.term} (#{el.name})\n"
+        out += "\# #{el.term}\n"
         out += "\n"
-        out += "#{el.desc}\n"
+        out += "#{el.name}. #{el.desc}\n"
         out += "\n"
         out += "\#\# Attributes\n"
         out += "\n"
