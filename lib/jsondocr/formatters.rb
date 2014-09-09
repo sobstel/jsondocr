@@ -3,4 +3,4 @@ module JSONdocr
   end
 end
 
-require_relative "formatters/markdown"
+require_relative "formatters/slate_markdown"

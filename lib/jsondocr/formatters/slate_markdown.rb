@@ -1,5 +1,6 @@
 module JSONdocr::Formatters
-  class Markdown
+  # Markdown tailor-made for tripit/slate (https://github.com/tripit/slate)
+  class SlateMarkdown
     def format(doc)
       out = "---\n"
       out += "title: #{doc.name}\n"
