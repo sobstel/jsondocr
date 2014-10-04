@@ -9,29 +9,66 @@ module JSONdocr::Formatters
       out += "---\n"
       out += "\n"
 
-      out += "\# Introduction\n"
+      out += "\# #{doc.name}\n"
       out += "\n"
       out += "#{doc.desc}\n"
       out += "\n"
 
-      doc.elements.each do |key, el|
-        out += "\# #{el.term}\n"
-        out += "\n"
-        out += "#{el.name}. #{el.desc}\n"
-        out += "\n"
-        out += "\#\# Attributes\n"
+      doc.elements.each_value do |el|
+        out += "\#\# #{el.term} (#{el.name})\n"
         out += "\n"
 
-        out += "Name | Term | Type | Description\n"
-        out += "---- | ---- | ---- | -----------\n"
+        if el.desc
+          out += "#{el.desc}\n"
+          out += "\n"
+        end
 
-        el.elements.each do |key, subel|
-          type = subel.type || subel.element_type
-          out += "#{subel.name} | #{subel.term} | #{type} | #{subel.desc}\n"
-        end if el.elements
+        out += format_elements(el.elements)
       end
 
       out
     end
+
+    private
+      def format_element(element)
+        out = ""
+
+        type = element.type || element.element_type
+        type_s = type.to_s
+        type_s += " [#{element.item.type || element.item.element_type}]" if (type == :array)
+
+        name_s = element.name.to_s
+
+        out += "<tr><td><strong>#{name_s}</strong></td><td><strong>#{element.term}</strong></td><td><em>#{type_s}</em></td></tr>\n"
+        out += "<tr><td colspan=\"2\"></td><td>#{element.desc}</td></tr>\n" if element.desc
+
+        if type == :object
+          out += "<tr><td colspan=\"2\"></td><td>\n"
+          out += format_elements(element.elements)
+          out += "</td></tr>\n"
+        end
+
+        if type == :array && element.item.element_type == :object
+          out += "<tr><td colspan=\"2\"></td><td>\n"
+          out += format_elements(element.item.elements)
+          out += "</td></tr>\n"
+        end
+
+        out
+      end
+
+      def format_elements(elements)
+        return "" unless elements
+
+        out = "<table>\n"
+
+        elements.each_value do |subel|
+          out += format_element(subel)
+        end
+
+        out += "</table>\n"
+
+        out
+      end
   end
 end
