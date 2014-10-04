@@ -39,8 +39,25 @@ module JSONdocr::Formatters
 
         name_s = element.name.to_s
 
-        out += "<tr><td><strong>#{name_s}</strong></td><td><strong>#{element.term}</strong></td><td><em>#{type_s}</em></td></tr>\n"
+        out += "<tr class=\"attr\"><td><strong>#{name_s}</strong></td><td><strong>#{element.term}</strong></td><td><em>#{type_s}</em></td></tr>\n"
         out += "<tr><td colspan=\"2\"></td><td>#{element.desc}</td></tr>\n" if element.desc
+
+        if element.validations
+          out += "<tr><td colspan=\"2\"></td><td>Constraints:<ul>"
+          element.validations.each do |validation|
+            name, values = validation.first
+            out += "<li>#{name}"
+            if values
+              out += " - "
+              values.each_with_index do |(key, val), index|
+                out += "#{key}: #{val}"
+                out += ", " if (values.length - 1 != index)
+              end
+            end
+            out += "</li>"
+          end
+          out += "</ul></td></tr>"
+        end
 
         if type == :object
           out += "<tr><td colspan=\"2\"></td><td>\n"

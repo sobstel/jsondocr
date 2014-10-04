@@ -5,7 +5,7 @@ module JSONdocr::Builders::Behaviors
     end
 
     # Adds validation rule
-    def validates(*attrs)
+    def validates(attrs)
       @validations ||= []
       @validations << attrs
       attrs
