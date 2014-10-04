@@ -71,5 +71,5 @@ Example
 
 Football schema (golazon) for mongodb
 
-* definitions: (https://github.com/sobstel/mago/tree/master/lib "football schema")
-* auto-generated html: http://schema.golazon.com/
+* definitions: (https://github.com/golazon/developer/tree/master/lib/golazon-data)
+* auto-generated html: http://developer.golazon.com/
