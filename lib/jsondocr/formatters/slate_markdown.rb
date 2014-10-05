@@ -1,5 +1,8 @@
+require "json"
+
 module JSONdocr::Formatters
   # Markdown tailor-made for tripit/slate (https://github.com/tripit/slate)
+  # It's implemented quick and dirty way. I know.
   class SlateMarkdown
     def format(doc)
       out = "---\n"
@@ -15,12 +18,13 @@ module JSONdocr::Formatters
       out += "\n"
 
       doc.elements.each_value do |el|
-        out += "\#\# #{el.term} (#{el.name})\n"
-        out += "\n"
+        out += "\#\# #{el.term} (#{el.name})\n\n"
+
+        json_example = JSON.pretty_generate(el.example)
+        out += "```json\n#{json_example}\n```\n\n"
 
         if el.desc
-          out += "#{el.desc}\n"
-          out += "\n"
+          out += "#{el.desc}\n\n"
         end
 
         out += format_elements(el.elements)
@@ -30,6 +34,20 @@ module JSONdocr::Formatters
     end
 
     private
+      def format_elements(elements)
+        return "" unless elements
+
+        out = "<table>\n"
+
+        elements.each_value do |subel|
+          out += format_element(subel)
+        end
+
+        out += "</table>\n"
+
+        out
+      end
+
       def format_element(element)
         out = ""
 
@@ -59,31 +77,17 @@ module JSONdocr::Formatters
           out += "</ul></td></tr>"
         end
 
-        if type == :object
+        if element.object?
           out += "<tr><td colspan=\"2\"></td><td>\n"
           out += format_elements(element.elements)
           out += "</td></tr>\n"
         end
 
-        if type == :array && element.item.element_type == :object
+        if element.array? && element.item.object?
           out += "<tr><td colspan=\"2\"></td><td>\n"
           out += format_elements(element.item.elements)
           out += "</td></tr>\n"
         end
-
-        out
-      end
-
-      def format_elements(elements)
-        return "" unless elements
-
-        out = "<table>\n"
-
-        elements.each_value do |subel|
-          out += format_element(subel)
-        end
-
-        out += "</table>\n"
 
         out
       end

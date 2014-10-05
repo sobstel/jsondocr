@@ -7,6 +7,7 @@ end
 
 require_relative "builders/behaviors/dsl"
 require_relative "builders/behaviors/validation"
+require_relative "builders/behaviors/example"
 
 require_relative "builders/doc"
 require_relative "builders/object"

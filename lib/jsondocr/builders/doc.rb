@@ -1,6 +1,7 @@
 module JSONdocr::Builders
   class Doc
     include Behaviors::Dsl
+    include Behaviors::Example
 
     dsl_elements :object
 

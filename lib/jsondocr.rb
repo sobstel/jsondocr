@@ -3,6 +3,7 @@ require "bundler/setup"
 module JSONdocr
 end
 
+require "jsondocr/example"
 require "jsondocr/element"
 require "jsondocr/builders"
 require "jsondocr/formatters"

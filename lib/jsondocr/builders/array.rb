@@ -2,12 +2,13 @@ module JSONdocr::Builders
   class Array
     include Behaviors::Dsl
     include Behaviors::Validation
+    include Behaviors::Example
 
     dsl_attr :name
     dsl_attr :term
     dsl_attr :desc
     dsl_attr :item
-    dsl_attr :sample
+    dsl_attr :example
 
     def item(element, &block)
       @item = element.doc(&block).build

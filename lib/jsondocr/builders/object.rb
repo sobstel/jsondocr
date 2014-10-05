@@ -2,6 +2,7 @@ module JSONdocr::Builders
   class Object
     include Behaviors::Dsl
     include Behaviors::Validation
+    include Behaviors::Example
 
     dsl_elements :object
     dsl_elements :property

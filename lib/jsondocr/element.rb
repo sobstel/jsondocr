@@ -1,5 +1,7 @@
 module JSONdocr
   class Element
+    include Example
+
     def initialize(element_type)
       @element_type = element_type
     end
