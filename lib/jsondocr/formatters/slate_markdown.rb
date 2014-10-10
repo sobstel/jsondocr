@@ -5,13 +5,8 @@ module JSONdocr::Formatters
   # It's implemented quick and dirty way. I know.
   class SlateMarkdown
     def format(doc)
-      out = "---\n"
-      out += "title: #{doc.name}\n"
+      out = ""
       out += "\n"
-      out += "search: true\n"
-      out += "---\n"
-      out += "\n"
-
       out += "\# #{doc.name}\n"
       out += "\n"
       out += "#{doc.desc}\n"
